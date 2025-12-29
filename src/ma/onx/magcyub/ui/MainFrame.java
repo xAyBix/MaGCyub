@@ -26,7 +26,7 @@ public class MainFrame extends JFrame{
 	private void config () {
 		setTitle(Constants.APP_NAME);
 		setIconImage(Constants.IMG);
-		//setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
+		setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
