@@ -1,4 +1,4 @@
-![Logo](/src/resources/img/icon.png)
+![Logo](src/main/resources/images/icon.png)
 
 # MaGCyub (Magi-Cube)
 
