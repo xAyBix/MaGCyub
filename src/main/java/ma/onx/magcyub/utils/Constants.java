@@ -26,6 +26,7 @@ public final class Constants {
 
 	// App properties
 	public static final String APP_NAME = "MaGCyub";
+	public static final String APP_ENV = "MAGCPS_HOME";
 	public static final Image IMG = getImage();
 
 	// Get screen dimensions

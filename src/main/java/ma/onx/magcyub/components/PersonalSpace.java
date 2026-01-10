@@ -7,6 +7,9 @@ package ma.onx.magcyub.components;
 
 import java.io.File;
 
+import ma.onx.magcyub.utils.Constants;
+import ma.onx.magcyub.utils.EnvironmentVariable;
+
 /**
  * Contains all the logic of the personal space	
  * 
@@ -15,7 +18,7 @@ import java.io.File;
  * 
  */
 public class PersonalSpace {
-	private static final String PERSONAL_SPACE_PATH = System.getenv("MAGCPS_HOME");
+	private static String PERSONAL_SPACE_PATH = System.getenv(Constants.APP_ENV);
 
 	private PersonalSpace() {
 	}
@@ -31,7 +34,8 @@ public class PersonalSpace {
 				repo.mkdirs();
 				repo.setExecutable(true);
 				// Set PERSONAL_SPACE_PATH to path and add it to environment variables
-
+				PERSONAL_SPACE_PATH = "PATH:" + repo.getAbsoluteFile();
+				EnvironmentVariable.setEnvironmentVariable(Constants.APP_ENV, PERSONAL_SPACE_PATH);
 				return true;
 			}
 		}
@@ -39,9 +43,10 @@ public class PersonalSpace {
 	}
 
 	public static boolean destroy() {
-		File repo = new File(PERSONAL_SPACE_PATH);
+		File repo = new File(PERSONAL_SPACE_PATH.replaceFirst("PATH:", ""));
 		if (repo != null) {
 			if (!repo.exists()) {
+				EnvironmentVariable.setEnvironmentVariable(Constants.APP_ENV, "");
 				// Delete children if exist first
 				repo.delete();
 				return true;

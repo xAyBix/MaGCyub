@@ -5,11 +5,12 @@
 
 package ma.onx.magcyub;
 
-import java.io.File;
 
 import javax.swing.SwingUtilities;
 
-import ma.onx.magcyub.ui.MainFrame;
+import ma.onx.magcyub.ui.LoginFrame;
+import ma.onx.magcyub.ui.RegisterFrame;
+import ma.onx.magcyub.utils.Constants;
 
 
 /**
@@ -25,7 +26,11 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				MainFrame.mainFrame = new MainFrame();
+				if (System.getenv(Constants.APP_ENV) == null) {
+					RegisterFrame.registerFrame = new RegisterFrame();
+				}else {
+					LoginFrame.loginFrame = new LoginFrame();
+				}
 			}
 		});
 		
