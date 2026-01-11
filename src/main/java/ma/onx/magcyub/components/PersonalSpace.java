@@ -31,7 +31,7 @@ public class PersonalSpace {
 		File repo = new File(path);
 		if (repo != null) {
 			if (!repo.exists()) {
-				repo.mkdirs();
+				System.out.println(repo.mkdirs());
 				repo.setExecutable(true);
 				// Set PERSONAL_SPACE_PATH to path and add it to environment variables
 				PERSONAL_SPACE_PATH = "PATH:" + repo.getAbsoluteFile();
