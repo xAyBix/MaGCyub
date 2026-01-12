@@ -181,12 +181,7 @@ public class MainFrame extends JFrame {
 
 		// Save button action
 		saveButton.addActionListener(e -> {
-			if (System.getenv(Constants.APP_ENV) == null) {
-				new RegisterFrame();
-			}else {
-				JOptionPane.showMessageDialog(this, "Settings saved successfully!", "Save",
-						JOptionPane.INFORMATION_MESSAGE);
-			}
+			new RegisterFrame();
 		});
 
 		savePanel.add(saveButton);

@@ -26,7 +26,10 @@ public final class Constants {
 
 	// App properties
 	public static final String APP_NAME = "MaGCyub";
-	public static final String APP_ENV = "MAGCPS_HOME";
+	public static final String APP_FOLDER = System.getProperty("user.home")+"/MaGCyub";
+	public static final String SETTINGS_PATH = APP_FOLDER + "/settings.json";
+	public static final String PERSONAL_SPACE_PATH = APP_FOLDER + "/Personal Space";
+	public static final String FILES_EXTENSION = ".mgcb";
 	public static final Image IMG = getImage();
 
 	// Get screen dimensions

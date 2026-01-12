@@ -9,10 +9,11 @@ package ma.onx.magcyub;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import ma.onx.magcyub.checks.Checks;
 import ma.onx.magcyub.components.PersonalSpace;
+import ma.onx.magcyub.properties.Settings;
 import ma.onx.magcyub.ui.LoginFrame;
 import ma.onx.magcyub.ui.MainFrame;
-import ma.onx.magcyub.utils.Constants;
 
 
 /**
@@ -41,8 +42,9 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				if (System.getenv(Constants.APP_ENV) == null) {
-					PersonalSpace.create(System.getProperty("user.home")+"/MaGCyub/Personal Space");
+				if (Checks.checkFirstTime() || !Checks.checkPersonalSpaceExistance()) {
+					PersonalSpace.create();
+					Settings.create();
 					MainFrame.mainFrame = new MainFrame();
 				}else {
 					LoginFrame.loginFrame = new LoginFrame();

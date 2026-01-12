@@ -14,12 +14,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
@@ -49,6 +49,7 @@ public class RegisterFrame extends JFrame {
 	public RegisterFrame() {
 		setTitle(Constants.APP_NAME + " - Register");
 		setSize(450, 450);
+		setIconImage(Constants.IMG);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -163,6 +164,12 @@ public class RegisterFrame extends JFrame {
 			public void mouseExited(java.awt.event.MouseEvent evt) {
 				registerButton.setBackground(accentGreen);
 			}
+		});
+		
+		registerButton.addActionListener(e -> {
+			JOptionPane.showMessageDialog(this, "Saved successfully!", "Save",
+					JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
 		});
 
 		messageLabel = new JLabel("", SwingConstants.CENTER);

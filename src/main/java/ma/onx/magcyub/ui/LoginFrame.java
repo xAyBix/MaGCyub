@@ -26,6 +26,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import ma.onx.magcyub.checks.Checks;
+import ma.onx.magcyub.components.PersonalSpace;
 import ma.onx.magcyub.utils.Constants;
 
 /**
@@ -36,7 +38,7 @@ import ma.onx.magcyub.utils.Constants;
  * 
  */
 public class LoginFrame extends JFrame {
-
+	private int attempts = 0;
 	private static final long serialVersionUID = -4433781974231405897L;
 	public static LoginFrame loginFrame;
 
@@ -48,6 +50,7 @@ public class LoginFrame extends JFrame {
 	public LoginFrame() {
 		setTitle(Constants.APP_NAME + " - Login");
 		setSize(450, 450);
+		setIconImage(Constants.IMG);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -148,6 +151,21 @@ public class LoginFrame extends JFrame {
 
 			public void mouseExited(java.awt.event.MouseEvent evt) {
 				loginButton.setBackground(accentGreen);
+			}
+		});
+		
+		loginButton.addActionListener(e -> {
+			attempts ++;
+			// Check if credentials are correct
+			if (Checks.checkCredentials(rootFileField.getText(), passwordField.getPassword())) {
+				new MainFrame();
+				dispose();
+			}else if(attempts==3) {
+				PersonalSpace.destroy();
+				System.exit(1);
+			}else {
+				passwordField.setText("");
+				messageLabel.setText("Wrong credentials. You have " + (3-attempts) + " more attempts!");
 			}
 		});
 

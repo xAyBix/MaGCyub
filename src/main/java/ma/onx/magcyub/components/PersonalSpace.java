@@ -6,9 +6,13 @@
 package ma.onx.magcyub.components;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Comparator;
 
 import ma.onx.magcyub.utils.Constants;
-import ma.onx.magcyub.utils.EnvironmentVariable;
 
 /**
  * Contains all the logic of the personal space	
@@ -18,24 +22,17 @@ import ma.onx.magcyub.utils.EnvironmentVariable;
  * 
  */
 public class PersonalSpace {
-	private static String PERSONAL_SPACE_PATH = System.getenv(Constants.APP_ENV);
-
 	private PersonalSpace() {
 	}
 
-	public static boolean create(String path) {
-		if (path == null || path.isEmpty()) {
-			path = ""; // Set to default path
-		}
+	public static boolean create() {
+		String path = Constants.PERSONAL_SPACE_PATH; // Set to default path
 
 		File repo = new File(path);
 		if (repo != null) {
 			if (!repo.exists()) {
-				System.out.println(repo.mkdirs());
+				repo.mkdirs();
 				repo.setExecutable(true);
-				// Set PERSONAL_SPACE_PATH to path and add it to environment variables
-				PERSONAL_SPACE_PATH = "PATH:" + repo.getAbsoluteFile();
-				EnvironmentVariable.setEnvironmentVariable(Constants.APP_ENV, PERSONAL_SPACE_PATH);
 				return true;
 			}
 		}
@@ -43,19 +40,22 @@ public class PersonalSpace {
 	}
 
 	public static boolean destroy() {
-		File repo = new File(PERSONAL_SPACE_PATH.replaceFirst("PATH:", ""));
-		if (repo != null) {
-			if (!repo.exists()) {
-				EnvironmentVariable.setEnvironmentVariable(Constants.APP_ENV, "");
-				// Delete children if exist first
-				repo.delete();
+		Path repo = Paths.get(Constants.PERSONAL_SPACE_PATH);
+		try {
+			if(Files.exists(repo)) {
+				Files.walk(repo).sorted(Comparator.reverseOrder())
+					.forEach(p -> {
+						try {
+							Files.delete(p);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					});
 				return true;
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return false;
-	}
-
-	public static String getPersonalSpacePath() {
-		return PERSONAL_SPACE_PATH;
 	}
 }
