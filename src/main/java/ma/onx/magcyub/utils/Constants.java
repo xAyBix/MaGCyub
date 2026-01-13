@@ -27,7 +27,7 @@ public final class Constants {
 	// App properties
 	public static final String APP_NAME = "MaGCyub";
 	public static final String APP_FOLDER = System.getProperty("user.home")+"/MaGCyub";
-	public static final String SETTINGS_PATH = APP_FOLDER + "/settings.json";
+	public static final String SETTINGS_PATH = APP_FOLDER + "/settings.ser";
 	public static final String PERSONAL_SPACE_PATH = APP_FOLDER + "/Personal Space";
 	public static final String FILES_EXTENSION = ".mgcb";
 	public static final Image IMG = getImage();
@@ -40,6 +40,16 @@ public final class Constants {
 	// Default application frame dimensions (set to 90% of screen dimensions)
 	public static final int FRAME_WIDTH = (int) (SCREEN_WIDTH * 0.9);
 	public static final int FRAME_HEIGHT = (int) (SCREEN_HEIGHT * 0.9);
+	
+	
+	// Tools
+	public static final String[] CHARACTERS = {
+	        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+	        "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+	        "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+	        "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+	        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "_"
+	};
 	
 	
 	private static Image getImage() {

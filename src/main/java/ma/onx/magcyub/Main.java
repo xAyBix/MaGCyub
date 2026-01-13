@@ -28,7 +28,7 @@ public class Main {
 		// Enable anti-aliasing and improve font rendering
 	    System.setProperty("awt.useSystemAAFontSettings", "on");
 	    System.setProperty("swing.aatext", "true");
-	    
+
 	    // For high DPI displays
 	    System.setProperty("sun.java2d.uiScale", "1.0");
 	    
@@ -44,9 +44,10 @@ public class Main {
 			public void run() {
 				if (Checks.checkFirstTime() || !Checks.checkPersonalSpaceExistance()) {
 					PersonalSpace.create();
-					Settings.create();
+					Settings.initialize();
 					MainFrame.mainFrame = new MainFrame();
 				}else {
+					Settings.initialize();
 					LoginFrame.loginFrame = new LoginFrame();
 				}
 			}
